@@ -1,0 +1,10 @@
+dato1 = None               # nulo
+dato2 = 2                  # entero
+dato3 = 2.0                # flotante      
+dato4 = False              # booleano
+dato5 = "texto"            # string  
+dato6 = 3 + 4j             # complejo
+dato7 = (1, 2)             # tupla
+dato8 = [1, 2]             # lista
+dato9 = {1, 2}             # set (conjunto)
+dato10 = {"A": 1, "B": 2}  # diccionario
