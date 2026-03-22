@@ -16,7 +16,7 @@
 
 # Conectar con GitHub
 
-## git remote add origin https://github.com/JulinhoHJ/bootcamp-backend-python.git
+## git remote add origin https://github.com/JulinhoHJ/bootcamp-backend-python.git (reemplar con el link del repositorio)
 ## git remote -v (verificar que se ha conectado con el repositorio)
 
 # Subir proyecto a GitHub
