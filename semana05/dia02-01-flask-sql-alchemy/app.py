@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy # type: ignore
 from sqlalchemy import Column, Integer, String, DateTime, func # type: ignore
 
@@ -20,23 +20,91 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route('/users')
+@app.route('/users', methods=['GET', 'POST'])
 def users():
+    method = request.method
     try:
-        users = User.query.all() # SELECT * FROM users
-        users_list = []
-        for user in users:
-            users_list.append({
+        if method == 'GET':
+            users = User.query.all() # SELECT * FROM users
+            users_list = []
+            for user in users:
+                users_list.append({
+                    'id': user.id,
+                    'name': user.name,
+                    'email': user.email,
+                    'created_at': str(user.created_at)
+                })
+            return users_list
+        elif method == 'POST':
+            data = request.get_json()
+            user = User(
+                name=data.get('name'),
+                email=data.get('email'),
+                password=data.get('password')
+            )
+            db.session.add(user)
+            db.session.commit()
+            return {
                 'id': user.id,
                 'name': user.name,
                 'email': user.email,
                 'created_at': str(user.created_at)
-            })
-        return users_list
+            }
     except Exception as e:
         return {
             'message': str(e)
-        }
+        }, 400
+    
+@app.route('/users/<int:user_id>', methods=['GET', 'PUT', 'DELETE'])
+def user(user_id: int):
+    method = request.method
+    try:
+        if method == 'GET':
+            user = User.query.get(user_id)
+            # user = User.query.filter_by(id=user_id).first()
+            if not user:
+                raise Exception('User not found')
+            return {
+                'id': user.id,
+                'name': user.name,
+                'email': user.email,
+                'created_at': str(user.created_at)
+            }
+        if method == 'PUT':
+            data = request.get_json()
+            user = User.query.get(user_id)
+            
+            if not user:
+                raise Exception('User not found')
+            
+            user.name = data.get('name')
+            user.email = data.get('email')
+            user.password = data.get('password')
+            db.session.commit()
+            return {
+                'id': user.id,
+                'name': user.name,
+                'email': user.email,
+                'created_at': str(user.created_at)
+            }
+        if method == 'DELETE':
+            user = User.query.get(user_id)
+            
+            if not user:
+                raise Exception('User not found')
+
+            db.session.delete(user)
+            db.session.commit()
+
+            return {
+                'message': 'User deleted'
+            }
+
+    except Exception as e:
+        return {
+            'message': str(e)
+        }, 400
+
 
 @app.route('/')
 def home():
