@@ -18,7 +18,7 @@ source entorno_flask/Scripts/activate
 ```
 ### Dependencias
 ```bash
-pip install flask
+pip install Flask
 ```
 
 

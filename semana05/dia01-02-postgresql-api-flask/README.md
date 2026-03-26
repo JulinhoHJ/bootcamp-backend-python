@@ -3,6 +3,6 @@
 ## Instalación
 
 ```bash
-pip install flask
+pip install Flask
 pip install psycopg2-binary
 ```
