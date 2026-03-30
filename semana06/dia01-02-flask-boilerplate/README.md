@@ -24,3 +24,8 @@ flask db init # crea la carpeta migrations - Solo la primera vez
 flask db migrate -m "Descripción de la migración" # crea las migraciones
 flask db upgrade # actualiza la base de datos
 ```
+
+## Listar dependencias
+```bash
+pip freeze > requirements.txt
+```
