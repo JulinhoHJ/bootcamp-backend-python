@@ -29,3 +29,10 @@ flask db upgrade # actualiza la base de datos
 ```bash
 pip freeze > requirements.txt
 ```
+
+# RUTA
+## Configurar models -> modelamos las tablas
+## Configurar services -> insertamos los datos y extraemos información (CRUD y otros)
+## Configurar resources -> configuramos la logica
+## Configurar las rutas -> configuramos la ruta
+
