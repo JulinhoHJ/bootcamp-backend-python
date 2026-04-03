@@ -6,6 +6,8 @@ from app.schemas.user_schema import (
     CreateUserSchema,
     UpdateUserSchema
 )
+from flask_jwt_extended import jwt_required # type: ignore
+from app.resources.auth_resource import admin_required # type: ignore
 import bcrypt # type: ignore
 
 def hash_password(password: str) -> str:
@@ -18,6 +20,7 @@ def hash_password(password: str) -> str:
 
 # GET, POST, PUT, DELETE, PATCH, OPTIONS
 class UserResource(Resource):
+    @admin_required()
     def get(self):
         try:
             users = user_service.get_all()
@@ -29,7 +32,8 @@ class UserResource(Resource):
             return {
                 'error': str(e)
             }, 400
-        
+
+    @jwt_required()
     def post(self):
         try:
             json = request.get_json()
@@ -101,7 +105,7 @@ class ManageUserResource(Resource):
             
             user_service.delete(user)
 
-            return '', 200
+            return None, 200
         except Exception as e:
             return {
                 'error': str(e)

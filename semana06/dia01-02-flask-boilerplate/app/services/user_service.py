@@ -38,4 +38,8 @@ class UserService:
         user = User.query.filter_by(id=id).first()
         return user
     
+    def get_by_email(self, email: str) -> User | None:
+        user = User.query.filter_by(email=email, is_active=True).first()
+        return user
+    
 user_service = UserService()
