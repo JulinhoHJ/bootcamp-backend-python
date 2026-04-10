@@ -54,3 +54,6 @@ pip freeze > requirements.txt
 ## Configurar services -> insertamos los datos y extraemos información (CRUD y otros)
 ## Configurar resources -> configuramos la logica
 ## Configurar las rutas -> configuramos la ruta
+
+## Storage
+pip install cloudinary
