@@ -57,3 +57,6 @@ pip freeze > requirements.txt
 
 ## Storage
 pip install cloudinary
+
+## CORS -> para que el front-end pueda acceder a la api
+pip install flask-cors

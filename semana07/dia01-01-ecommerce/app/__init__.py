@@ -12,8 +12,10 @@ from app.models import (
   customer_model,
   category_model
 )
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config.from_object(Config)
 db.init_app(app)
 migrate = Migrate(app, db)
