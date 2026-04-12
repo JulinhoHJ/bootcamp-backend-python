@@ -9,10 +9,12 @@ from app.resources.auth_resource import (
   LoginResource,
   RegisterResource
 )
+from app.resources.category_resource import CategoryResource
 from app.resources.product_resource import (
   ProductResource, 
   ManageProductResource
 )
+from app.resources.sale_resource import SaleResource
 
 api = Api(app, prefix='/api')
 
@@ -21,4 +23,7 @@ api.add_resource(ManageUserResource, '/users/<int:id>')
 api.add_resource(LoginResource, '/auth/login')
 api.add_resource(RoleResource, '/roles')
 
+api.add_resource(CategoryResource, '/categories')
 api.add_resource(ProductResource, '/products')
+api.add_resource(ManageProductResource, '/products/<int:id>')
+api.add_resource(SaleResource, '/sales')

@@ -15,7 +15,7 @@ class CloudinaryHelper:
   def upload_image(
         self, 
         image: FileStorage, 
-        folder: str = 'product'
+        folder: str = 'products'
       ) -> tuple[str, str] | None:
     try:
       response = cloudinary.uploader.upload(
@@ -27,5 +27,14 @@ class CloudinaryHelper:
       return secure_url, public_id
     except Exception as e:
       return None
+    
+  def delete_image(self, public_id: str) -> bool:
+    try:
+      cloudinary.uploader.destroy(
+        public_id
+      )
+      return True
+    except Exception as e:
+      return False
     
 cloudinary_helper = CloudinaryHelper()
