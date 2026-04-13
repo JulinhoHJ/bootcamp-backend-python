@@ -47,6 +47,7 @@ class Ticket(db.Model):
             'ticket_details': {
                 'id': self.ticket_detail.id,
                 'applicant': self.ticket_detail.applicant,
+                'email': self.ticket_detail.email,
                 'phone': self.ticket_detail.phone,
                 'description': self.ticket_detail.description,
                 'area_sede_id': self.ticket_detail.area_sede_id,

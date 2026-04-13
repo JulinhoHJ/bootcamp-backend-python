@@ -22,11 +22,7 @@ from app.resources.area_sede_resource import (
   AreaSedeResource,
   ManageAreaSedeResource
 )
-#from app.resources.product_resource import (
-#  ProductResource, 
-#  ManageProductResource
-#)
-#from app.resources.sale_resource import SaleResource
+from app.resources.ticket_resource import TicketResource
 
 api = Api(app, prefix='/api')
 
@@ -46,6 +42,5 @@ api.add_resource(ManageAreaResource, '/areas/<int:id>')
 
 api.add_resource(AreaSedeResource, '/areas_sedes')
 api.add_resource(ManageAreaSedeResource, '/areas_sedes/<int:id>')
-#api.add_resource(ProductResource, '/products')
-#api.add_resource(ManageProductResource, '/products/<int:id>')
-#api.add_resource(SaleResource, '/sales')
+
+api.add_resource(TicketResource, '/tickets')

@@ -1,19 +1,19 @@
 from flask_restful import Resource
 from flask import request
-from app.schemas.sale_schema import SaleSchema
-from app.services.sale_service import sale_service
+from app.schemas.ticket_schema import TicketSchema
+from app.services.ticket_service import ticket_service
 from pydantic import ValidationError
 from db import db
 
-class SaleResource(Resource):
+class TicketResource(Resource):
   def get(self):
     try:
-      sales = sale_service.get_all()
-      sales_list = []
-      for sale in sales:
-        sales_list.append(sale.to_json())
+      tickets = ticket_service.get_all()
+      tickets_list = []
+      for ticket in tickets:
+        tickets_list.append(ticket.to_json())
       
-      return sales_list, 200
+      return tickets_list, 200
     except Exception as e:
       return {
         'error': str(e)
@@ -22,9 +22,9 @@ class SaleResource(Resource):
   def post(self):
     try:
       json = request.get_json()
-      validated_data = SaleSchema.model_validate(json)
-      sale = sale_service.create(validated_data)
-      return sale.to_json(), 200
+      validated_data = TicketSchema.model_validate(json)
+      ticket = ticket_service.create(validated_data)
+      return ticket.to_json(), 200
     except ValidationError as e:
       return {
         'error': e.errors()
@@ -34,4 +34,3 @@ class SaleResource(Resource):
       return {
         'error': str(e)
       }, 400
-    
