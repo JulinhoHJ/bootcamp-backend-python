@@ -3,13 +3,13 @@ from sqlalchemy import (
     Column,
     Integer,
     String,
-    Boolean,
     DateTime,
-    func
+    func,
+    Boolean
 )
 
-class Category(db.Model):
-    __tablename__ = 'categories'
+class Sede(db.Model):
+    __tablename__ = 'sedes'
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100), nullable=False)

@@ -6,11 +6,12 @@ from db import db
 from app.models import (
   role_model,
   user_model,
-  product_model,
-  sale_model,
-  sale_detail_model,
-  customer_model,
-  category_model
+  category_model,
+  area_model,
+  sede_model,
+  area_sede_model,
+  ticket_model,
+  ticket_detail_model
 )
 from flask_cors import CORS
 
