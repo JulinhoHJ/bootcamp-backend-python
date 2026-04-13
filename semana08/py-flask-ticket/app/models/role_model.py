@@ -16,3 +16,9 @@ class Role(db.Model):
     created_at = Column(DateTime, default=func.now())
 
     users = relationship('User')
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }

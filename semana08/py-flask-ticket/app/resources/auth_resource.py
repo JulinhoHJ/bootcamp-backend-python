@@ -33,7 +33,7 @@ def admin_required(): # Decorator
                     'error': 'User not found'
                 }, 401
             
-            if user.role.name != 'ADMIN':
+            if user.role.name != 'ADMINISTRADOR':
                 return {
                     'error': 'User not authorized'
                 }, 403
@@ -70,7 +70,9 @@ class LoginResource(Resource):
                 additional_claims={
                     'name': user.name,
                     'last_name': user.last_name,
-                    'email': user.email
+                    'email': user.email,
+                    'role_id': user.role_id,
+                    'sede_id': user.sede_id
                 }
             )
             refresh_token = create_refresh_token(
@@ -86,6 +88,3 @@ class LoginResource(Resource):
             return {
                 'error': str(e)
             }, 400
-        
-class RegisterResource(Resource):
-    pass

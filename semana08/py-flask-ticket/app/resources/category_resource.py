@@ -52,7 +52,7 @@ class ManageCategoryResource(Resource):
 
   def put(self, id: int):
     try:
-      json = request.get()
+      json = request.get_json()
       validated_data = CategorySchema.model_validate(json)
       category = category_service.get_by_id(id)
 

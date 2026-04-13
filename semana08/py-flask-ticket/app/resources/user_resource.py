@@ -9,6 +9,7 @@ from app.schemas.user_schema import (
 from flask_jwt_extended import jwt_required
 from app.resources.auth_resource import admin_required
 import bcrypt
+from db import db
 
 def hash_password(password: str) -> str:
     bytes_password = password.encode('utf-8')
@@ -45,6 +46,7 @@ class UserResource(Resource):
                 'error': e.errors()
             }, 400
         except Exception as e:
+            db.session.rollback()
             return {
                 'error': str(e)
             }, 400
@@ -89,6 +91,7 @@ class ManageUserResource(Resource):
                 'error': e.errors()
             }, 400
         except Exception as e:
+            db.session.rollback()
             return {
                 'error': str(e)
             }, 400
@@ -106,6 +109,7 @@ class ManageUserResource(Resource):
 
             return None, 200
         except Exception as e:
+            db.session.rollback()
             return {
                 'error': str(e)
             }, 400

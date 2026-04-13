@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class CategorySchema(BaseModel):
-  name: str
+  name: str = Field(..., max_length=100)

@@ -5,16 +5,27 @@ from app.schemas.role_schema import RoleSchema
 from app.services.role_service import role_service
 
 class RoleResource(Resource):
+    def get(self):
+        try:
+            roles = role_service.get_all()
+            roles_list = []
+            for role in roles:
+                roles_list.append(
+                    role.to_json()
+                )
+            return roles_list, 200
+        except Exception as e:
+            return {
+                'error': str(e)
+            }, 400
+
     def post(self):
         try:
             json = request.get_json()
             validated_data = RoleSchema.model_validate(json)
             role = role_service.create(validated_data)
 
-            return {
-                'id': role.id,
-                'name': role.name
-            }, 200
+            return role.to_json(), 200
         except ValidationError as e:
             return {
                 'error': e.errors()

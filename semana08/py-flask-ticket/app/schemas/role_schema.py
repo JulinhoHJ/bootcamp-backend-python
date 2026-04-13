@@ -1,5 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 class RoleSchema(BaseModel):
-    name: str
-    
+    name: str = Field(..., min_length=3, max_length=20)

@@ -19,8 +19,8 @@ class TicketDetail(db.Model):
     area_sede_id = Column(Integer, ForeignKey('areas_sedes.id'), nullable=False)
     category_id = Column(Integer, ForeignKey('categories.id'), nullable=False)
 
-    area_sede = relationship('areas_sedes')
-    category = relationship('categories')
+    area_sede = relationship('AreaSede')
+    category = relationship('Category')
 
     def to_json(self):
         return {

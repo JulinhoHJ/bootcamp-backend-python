@@ -3,6 +3,10 @@ from app.schemas.role_schema import RoleSchema
 from db import db
 
 class RoleService:
+    def get_all(self) -> list[Role]:
+        roles = Role.query.all()
+        return roles
+    
     def create(self, data: RoleSchema):
         role =Role(
             name=data.name

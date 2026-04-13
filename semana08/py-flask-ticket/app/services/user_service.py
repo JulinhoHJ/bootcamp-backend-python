@@ -11,9 +11,11 @@ class UserService:
         user = User(
             name=data.name,
             last_name=data.last_name,
+            phone=data.phone,
             email=data.email,
             password=data.password,
-            role_id=data.role_id
+            role_id=data.role_id,
+            sede_id=data.sede_id
         )
         db.session.add(user)
         db.session.commit()
@@ -22,8 +24,10 @@ class UserService:
     def update(self, user: User, data: CreateUserSchema):
         user.name = data.name
         user.last_name = data.last_name
+        user.phone = data.phone
         user.email = data.email
         user.role_id = data.role_id
+        user.sede_id = data.sede_id
 
         if data.password:
             user.password = data.password
@@ -37,7 +41,10 @@ class UserService:
         return user
     
     def get_by_id(self, id: int) -> User | None:
-        user = User.query.filter_by(id=id).first()
+        user = User.query.filter_by(
+            id=id,
+            is_active=True
+        ).first()
         return user
     
     def get_by_email(self, email: str) -> User | None:
