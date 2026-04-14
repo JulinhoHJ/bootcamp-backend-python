@@ -3,6 +3,7 @@ from flask import request
 from app.services.area_service import area_service
 from pydantic import ValidationError
 from app.schemas.area_schema import AreaSchema
+from flask_jwt_extended import jwt_required
 
 class AreaResource(Resource):
   def get(self):
@@ -72,6 +73,7 @@ class ManageAreaResource(Resource):
         'error': str(e)
       }, 400
 
+  @jwt_required()
   def delete(self, id: int):
     try:
       area = area_service.get_by_id(id)

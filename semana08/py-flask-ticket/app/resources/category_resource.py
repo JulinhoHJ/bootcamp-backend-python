@@ -3,6 +3,7 @@ from flask import request
 from app.services.category_service import category_service
 from pydantic import ValidationError
 from app.schemas.category_schema import CategorySchema
+from flask_jwt_extended import jwt_required
 
 class CategoryResource(Resource):
   def get(self):
@@ -72,6 +73,7 @@ class ManageCategoryResource(Resource):
         'error': str(e)
       }, 400
 
+  @jwt_required()
   def delete(self, id: int):
     try:
       category = category_service.get_by_id(id)

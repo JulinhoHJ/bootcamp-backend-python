@@ -3,9 +3,11 @@ from flask import request
 from app.schemas.ticket_schema import TicketSchema
 from app.services.ticket_service import ticket_service
 from pydantic import ValidationError
+from flask_jwt_extended import jwt_required
 from db import db
 
 class TicketResource(Resource):
+  @jwt_required()
   def get(self):
     try:
       tickets = ticket_service.get_all()

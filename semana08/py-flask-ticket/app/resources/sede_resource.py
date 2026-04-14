@@ -3,6 +3,7 @@ from flask import request
 from app.services.sede_service import sede_service
 from pydantic import ValidationError
 from app.schemas.sede_schema import SedeSchema
+from flask_jwt_extended import jwt_required
 
 class SedeResource(Resource):
   def get(self):
@@ -72,6 +73,7 @@ class ManageSedeResource(Resource):
         'error': str(e)
       }, 400
 
+  @jwt_required()
   def delete(self, id: int):
     try:
       sede = sede_service.get_by_id(id)
