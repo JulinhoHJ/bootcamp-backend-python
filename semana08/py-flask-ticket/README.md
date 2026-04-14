@@ -1,6 +1,8 @@
-# Flask Boilerplate
+# Flask ticket
 
-Este es un boilerplate de flask con algunas dependencias y configuraciones que se pueden usar para comenzar a desarrollar una aplicación Flask.
+Este es una app de gestión de tickets donde una empresa con múltiples sedes puede registrar, asignar, atender y cerrar tickets de incidencias que se generan en distintas sedes.
+
+Cada ticket es generado por un solicitante y se clasifica por categoría y área dentro de una sede específica. Los usuarios, pertenecientes a distintas sedes y con roles definidos, son responsables de atender estos tickets siguiendo un flujo estructurado: asignación, atención y cierre. El sistema permite controlar el estado del ticket, registrar fechas clave del proceso y almacenar la solución brindada.
 
 ## Tecnologías y Requisitos
 * **Python**: >= 3.12.x
@@ -12,7 +14,7 @@ Este es un boilerplate de flask con algunas dependencias y configuraciones que s
 
 1. **Clonar el repositorio:**
     ```bash
-    git clone https://github.com/user/repo.git
+    git clone https://github.com/JulinhoHJ/bootcamp-backend-python/tree/main/semana08/py-flask-ticket
     ```
 2. **Crear y activar el entorno virtual:**
     ```bash
@@ -40,39 +42,6 @@ flask db upgrade # actualiza la base de datos
 ## Ejecución
 ```bash
 python run.py
-```
-## Estructura del proyecto
-```bash
-├── app
-│   ├── models
-│   │   ├── user_model.py
-│   │   └── role_model.py
-│   ├── resources
-│   │   ├── auth_resource.py
-│   │   ├── user_resource.py
-│   │   └── role_resource.py
-│   ├── schemas
-│   │   ├── auth_schema.py
-│   │   ├── user_schema.py
-│   │   └── role_schema.py
-│   ├── services
-│   │   ├── user_service.py
-│   │   └── role_service.py
-│   ├── __init__.py
-│   └── routes.py
-├── migrations
-│   ├── README
-│   ├── env.py
-│   ├── script.py.mako
-│   ├── alembic.ini
-│   └── versions
-├── README.md
-├── requirements.txt
-├── run.py
-├── .gitignore
-├── config.py
-└── db.py
-
 ```
 ## Testing
 ```bash
