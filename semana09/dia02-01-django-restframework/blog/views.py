@@ -2,8 +2,9 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Post
-from .serializers import PostSerializer
+from rest_framework import generics
+from .models import Post, Comment
+from .serializers import PostSerializer, CommentSerializer
 
 class PostView(APIView):
     def get(self, request):
@@ -41,3 +42,11 @@ class ManagePostView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class CommentView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+class ManageCommentView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
