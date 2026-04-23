@@ -25,6 +25,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'drf_spectacular',
+
+    'api',
+    'authentication',
+    'transactions',
+    'services',
 ]
 
 MIDDLEWARE = [
@@ -107,3 +114,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+} 
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Rest API para BarberShop',
+    'DESCRIPTION': 'Esta es una API para aplicaciones de barbershops',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
