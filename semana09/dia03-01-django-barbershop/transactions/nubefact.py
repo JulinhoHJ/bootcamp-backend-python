@@ -25,7 +25,7 @@ def send_nubefact_invoice(appointment_instance: Appointments):
         'operacion': 'generar_comprobante',
         'tipo_de_comprobante': 2,
         'serie': 'BBB1',
-        'numero': 1,
+        'numero': 2,
         'sunat_transaction': 1,
         'cliente_tipo_de_documento': 1,
         'cliente_numero_de_documento': customer.document_number,
