@@ -20,7 +20,7 @@ def client_with_auth():
         'password': faker.password(),
         'role': role.data['id']
     }
-    user = client.post('/api/auth/register/', user_payload, format='json')
+    user = client.post('/api/users/', user_payload, format='json')
 
     assert user.status_code == status.HTTP_201_CREATED
 
@@ -32,7 +32,7 @@ def client_with_auth():
     login_data = login.data
     assert login.status_code == status.HTTP_200_OK
 
-    client.credentials(HTTP_AUTHORIZATION=f'Bearer {login_data['access_token']}')
+    client.credentials(HTTP_AUTHORIZATION=f'Bearer {login_data['access']}')
 
     return client
 

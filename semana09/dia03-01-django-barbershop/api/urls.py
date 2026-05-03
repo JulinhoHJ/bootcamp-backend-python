@@ -18,6 +18,9 @@ from authentication.views import (
 from transactions.views import (
     AppointmentsView,
 )
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+)
 
 urlpatterns = [
     path('services/', ServicesView.as_view()),
@@ -37,6 +40,8 @@ urlpatterns = [
     path('users/<int:pk>/', ManageUserView.as_view()),
 
     path('users/roles/', UserRolesView.as_view()),
+
+    path('auth/login/', TokenObtainPairView.as_view()),
 
     path('appointments/', AppointmentsView.as_view()),
     
