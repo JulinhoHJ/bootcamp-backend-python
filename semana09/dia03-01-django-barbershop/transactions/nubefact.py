@@ -5,10 +5,23 @@ from .models import Appointments
 from services.models import Services
 from .models import Customers
 from datetime import datetime
+import logging
+
+logger = logging.getLogger('app_nubefact')
 
 def send_nubefact_invoice(appointment_instance: Appointments):
     url = settings.NUBEFACT.get('URL')
     token = settings.NUBEFACT.get('TOKEN')
+
+    if not url:
+        logger.error('Configuración de Nubefact incorrecta. URL no encontrada')
+        return
+    
+    if not token:
+        logger.error('Configuración de Nubefact incorrecta. Token no encontrado')
+        return
+    
+    logger.info('Iniciando envio de documento a Nubefact')
 
     customer: Customers = appointment_instance.customer
     service: Services = appointment_instance.service
@@ -57,18 +70,19 @@ def send_nubefact_invoice(appointment_instance: Appointments):
         ]
     }
 
-    response = requests.post(
-        url=url, 
-        headers={
-            'Authorization': token,
-            'Content-Type': 'application/json',
-        },
-        json=payload,
-    )
-    json = response.json()
-    status = response.status_code
+    try:
+        response = requests.post(
+            url=url, 
+            headers={
+                'Authorization': token,
+                'Content-Type': 'application/json',
+            },
+            json=payload,
+        )
+        status = response.status_code
+        if status != 200:
+            json = response.json()
+            logger.error(f'{json['errors']}: {status}')
 
-    if status != 200:
-        raise Exception(json['errors'])
-    
-    return json
+    except requests.exceptions.RequestException as e:
+        logger.exception("Error de conexión con el servicio de facturación Nubefact")
