@@ -17,5 +17,5 @@ filterwarnings = ignore::DeprecationWarning
 ## Ejecución
 
 ```bash
-pytest
+pytest -v -rA -s
 ```
