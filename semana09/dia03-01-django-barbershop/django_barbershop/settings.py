@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'drf_spectacular',
+    'corsheaders',
 
     'api',
     'authentication',
@@ -38,6 +39,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -110,9 +112,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/6.0/howto/static-files/
+CORS_ALLOW_ALL_ORIGINS = True
 
 STATIC_URL = 'static/'
 
@@ -147,7 +147,7 @@ SPECTACULAR_SETTINGS = {
             'description': 'Servidor de pruebas'
         },
         {
-            'url': 'https://api.barbershop.com',
+            'url': 'https://django-barbershop-2o46.onrender.com/',
             'description': 'Servidor de producción'
         }
     ],
